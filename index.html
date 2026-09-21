@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>SoulShot</title>
-<meta name="description" content="A 30-second shot from SoulShot. Tap to listen.">
+<meta name="description" content="A one-minute shot from SoulShot. Tap to listen.">
 <meta property="og:title" content="A SoulShot, shared with you">
-<meta property="og:description" content="A 30-second shot. Tap to listen.">
+<meta property="og:description" content="A one-minute shot. Tap to listen.">
 <meta property="og:site_name" content="SoulShot">
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#FFF4E6">
@@ -57,14 +57,15 @@
       <svg class="pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
     </button>
     <div class="track"><div class="bar"><div class="fill" id="fill"></div></div>
-      <div class="times"><span id="now">0:00</span><span id="end">0:30</span></div>
+      <div class="times"><span id="now">0:00</span><span id="end">1:15</span></div>
     </div>
   </div>
   <audio id="audio" preload="metadata"></audio>
+  <audio id="bed" preload="auto" loop></audio>
   <div class="words" id="words"><p class="quiet">Opening…</p></div>
   <div class="get">
     <a class="cta" id="cta" href="https://apps.apple.com/app/id6813150517">Get SoulShot</a>
-    <div class="foot">Your own 30-second shot, every morning. <b>Prayer, motivation or manifestation.</b></div>
+    <div class="foot">Your own one-minute shot, every morning. <b>Prayer, motivation or manifestation.</b></div>
   </div>
 </div>
 <script>
@@ -93,16 +94,21 @@
       String(shot.script||'').split(/(?<=[.!?…]["'”’)\]]*)\s+/).forEach(function(s){s=s.trim();if(!s)return;var p=document.createElement('p');p.textContent=s;words.appendChild(p)});
       if(shot.appStoreUrl)$('cta').href=shot.appStoreUrl;
       if(!shot.audioUrl)return;
-      var a=$('audio'),b=$('play'),f=$('fill'),n=$('now');
+      var a=$('audio'),b=$('play'),f=$('fill'),n=$('now'),m=$('bed');
       a.src=shot.audioUrl;
-      $('end').textContent=fmt(shot.durationSeconds||30);
+      // The music under the voice, as the app plays it: the delivery's own
+      // bed, looping quietly, in with the voice and out with the last word.
+      var bed=shot.bed&&shot.bed.url?shot.bed:null,gain=bed?Math.max(0,Math.min(1,bed.gain||0.3)):0,fade=null;
+      if(bed){m.src=bed.url;m.volume=gain}
+      function ramp(to,ms,done){if(!bed)return;clearInterval(fade);var from=m.volume,steps=10,i=0;fade=setInterval(function(){i++;m.volume=Math.max(0,Math.min(1,from+(to-from)*i/steps));if(i>=steps){clearInterval(fade);done&&done()}},ms/steps)}
+      $('end').textContent=fmt(shot.durationSeconds||75);
       $('player').hidden=false;
       b.addEventListener('click',function(){if(a.paused){a.play()}else{a.pause()}});
-      a.addEventListener('play',function(){b.classList.add('on');b.setAttribute('aria-label','Pause')});
-      a.addEventListener('pause',function(){b.classList.remove('on');b.setAttribute('aria-label','Play')});
+      a.addEventListener('play',function(){b.classList.add('on');b.setAttribute('aria-label','Pause');if(bed){m.volume=0;m.play().catch(function(){});ramp(gain,900)}});
+      a.addEventListener('pause',function(){b.classList.remove('on');b.setAttribute('aria-label','Play');if(bed&&!a.ended)ramp(0,400,function(){m.pause()})});
       a.addEventListener('loadedmetadata',function(){if(a.duration)$('end').textContent=fmt(a.duration)});
       a.addEventListener('timeupdate',function(){if(a.duration){f.style.width=(a.currentTime/a.duration*100)+'%';n.textContent=fmt(a.currentTime)}});
-      a.addEventListener('ended',function(){f.style.width='100%'});
+      a.addEventListener('ended',function(){f.style.width='100%';if(bed)ramp(0,1500,function(){m.pause();m.currentTime=0})});
     })
     .catch(notFound);
 })();
