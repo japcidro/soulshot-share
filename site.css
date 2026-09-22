@@ -298,3 +298,11 @@ p { margin: 0; }
 @media (prefers-reduced-motion: reduce) { .shot .bar i { transition: none; } }
 
 [hidden] { display: none !important; }
+
+/* The words of the piece that is playing, as the shared-link page shows them. */
+.now { margin-top: 28px; padding: 26px 28px; border-radius: 22px; background: rgba(255, 255, 255, .55); border: 1px solid rgba(255, 255, 255, .7); max-width: 44rem; }
+.now-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+.now-lane { font-size: .85rem; font-weight: 600; color: var(--plum-2); }
+.now-title { font-size: 1.5rem; font-style: italic; }
+.now-words { margin-top: 14px; font-family: var(--serif); font-variation-settings: "SOFT" 60; font-size: 1.2rem; line-height: 1.45; color: var(--plum); max-height: 22rem; overflow: auto; padding-right: 6px; }
+.now-words p { margin: 0 0 .8em; }

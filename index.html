@@ -66,34 +66,38 @@
 
   <section class="section" id="listen" aria-labelledby="listen-title">
     <div class="section-head">
-      <h2 id="listen-title" data-live="Hear what a minute does." data-still="Three kinds of shot. You choose.">Three kinds of shot. You choose.</h2>
-      <p class="lede" id="listen-lede" data-live="Three real shots, one of each kind. Put your headphones on and press play. The ones the app makes for you are about your own day." data-still="Pick the kind of lift you want, and change it whenever you like.">Pick the kind of lift you want, and change it whenever you like.</p>
+      <h2 id="listen-title" data-live="Hear one first." data-still="Three kinds of shot. You choose.">Three kinds of shot. You choose.</h2>
+      <p class="lede" id="listen-lede" data-live="Three pieces from the app, as anyone with a shared link hears them. Put your headphones on and press play. The daily shot the app makes for you is a minute long and about your own day." data-still="Pick the kind of lift you want, and change it whenever you like.">Pick the kind of lift you want, and change it whenever you like.</p>
     </div>
     <div class="lanes samples" id="samples">
-      <article class="shot prayer sample" data-token="">
+      <article class="shot prayer sample" data-token="long-d6a1d5a7-d20a-48a1-bf06-2ded9d63ea09">
         <img src="img/prayer.jpg" alt="" loading="lazy">
         <div class="lane">Prayer</div>
-        <div class="title">Lord, hold the morning</div>
-        <p class="desc">Written in your own voice, to God as you understand God. It never speaks as God and never claims to know God’s will.</p>
+        <div class="title">After a Long Day</div>
+        <p class="desc">Listen to this if you need to unwind after a tough day.</p>
         <div class="bar" aria-hidden="true"><i></i></div>
-        <div class="meta"><span class="dur">1:10</span><button class="play" type="button" aria-label="Play the prayer sample"><svg class="ic-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg></button></div>
+        <div class="meta"><span class="dur">3:21</span><button class="play" type="button" aria-label="Play After a Long Day"><svg class="ic-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg></button></div>
       </article>
-      <article class="shot motivation sample" data-token="">
+      <article class="shot motivation sample" data-token="long-bce236e6-82da-464e-83e7-87c27c03a95f">
         <img src="img/motivation.jpg" alt="" loading="lazy">
         <div class="lane">Motivation</div>
-        <div class="title">Before the 10am</div>
-        <p class="desc">A push for the one thing in front of you today, from something that remembers what you said about it yesterday.</p>
+        <div class="title">The Call to Action</div>
+        <p class="desc">Listen to this if you need a push to fight for your goals.</p>
         <div class="bar" aria-hidden="true"><i></i></div>
-        <div class="meta"><span class="dur">1:05</span><button class="play" type="button" aria-label="Play the motivation sample"><svg class="ic-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg></button></div>
+        <div class="meta"><span class="dur">1:45</span><button class="play" type="button" aria-label="Play The Call to Action"><svg class="ic-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg></button></div>
       </article>
-      <article class="shot manifestation sample" data-token="">
-        <img src="img/manifestation.jpg" alt="" loading="lazy">
-        <div class="lane">Manifestation</div>
-        <div class="title">Already on its way</div>
-        <p class="desc">A clear picture of where you are going, in the present tense. It promises no cures, no money and no dates.</p>
+      <article class="shot motivation sample" data-token="long-a0811104-c10b-48c2-85b3-9d3c6eac5b7a">
+        <img src="img/fire.jpg" alt="" loading="lazy">
+        <div class="lane">Motivation</div>
+        <div class="title">When Change Feels Hard</div>
+        <p class="desc">Listen to this if you need a nudge to start small steps.</p>
         <div class="bar" aria-hidden="true"><i></i></div>
-        <div class="meta"><span class="dur">1:05</span><button class="play" type="button" aria-label="Play the manifestation sample"><svg class="ic-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg></button></div>
+        <div class="meta"><span class="dur">2:08</span><button class="play" type="button" aria-label="Play When Change Feels Hard"><svg class="ic-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg></button></div>
       </article>
+    </div>
+    <div class="now" id="now" hidden>
+      <div class="now-head"><span class="now-lane" id="now-lane"></span><span class="now-title serif" id="now-title"></span></div>
+      <div class="now-words" id="now-words"></div>
     </div>
     <audio id="voice" preload="none"></audio>
     <audio id="bed" preload="none" loop></audio>
@@ -235,6 +239,14 @@
   var current=null,gain=0,fade=null;
   function fmt(s){s=Math.max(0,Math.round(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
   function ramp(to,ms,done){clearInterval(fade);var from=bed.volume,steps=10,i=0;fade=setInterval(function(){i++;bed.volume=Math.max(0,Math.min(1,from+(to-from)*i/steps));if(i>=steps){clearInterval(fade);done&&done()}},ms/steps)}
+  var now=document.getElementById('now');
+  function showWords(card,s){
+    document.getElementById('now-lane').textContent=card.querySelector('.lane').textContent;
+    document.getElementById('now-title').textContent=s.title||'';
+    var w=document.getElementById('now-words');w.innerHTML='';
+    String(s.script||'').split(/\n+/).forEach(function(p){p=p.trim();if(!p)return;var el=document.createElement('p');el.textContent=p;w.appendChild(el)});
+    now.hidden=false;
+  }
   function stop(){if(!current)return;voice.pause();current.classList.remove('playing');current.querySelector('.bar i').style.width='0';current=null}
   live.forEach(function(card){
     var btn=card.querySelector('.play'),shot=null;
@@ -245,7 +257,7 @@
     btn.addEventListener('click',function(){
       if(current===card){if(voice.paused){voice.play()}else{voice.pause()}return}
       if(!shot||!shot.audioUrl)return;
-      stop();current=card;
+      stop();current=card;showWords(card,shot);
       voice.src=shot.audioUrl;
       gain=shot.bed&&shot.bed.url?Math.max(0,Math.min(1,shot.bed.gain||0.3)):0;
       if(gain){bed.src=shot.bed.url;bed.volume=0}
