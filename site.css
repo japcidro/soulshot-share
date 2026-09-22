@@ -296,3 +296,5 @@ p { margin: 0; }
 .shot.still .play, .shot.still .bar { display: none; }
 
 @media (prefers-reduced-motion: reduce) { .shot .bar i { transition: none; } }
+
+[hidden] { display: none !important; }
