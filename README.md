@@ -4,7 +4,10 @@ The public site: landing page, `/privacy/`, `/terms/`, `/support/`, the shared-s
 player at `/s/?t=<token>`, and a 404. Plain HTML and CSS, no build step.
 
 Hosted on GitHub Pages from the public repo `japcidro/soulshot-share` (branch
-`main`, root), with `CNAME` pointing it at `soulshot.online`. The source of truth
+`main`, root). `CNAME.after-dns` becomes `CNAME` the moment the GoDaddy records
+resolve (`git mv web/CNAME.after-dns web/CNAME`, then publish): with the CNAME
+in place GitHub redirects the old `japcidro.github.io/soulshot-share/` links to
+the domain, so it must not go live before DNS does or every shared link dies. The source of truth
 is this folder in the app repo; publish by copying it over:
 
 ```bash
