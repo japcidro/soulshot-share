@@ -4,114 +4,229 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>SoulShot</title>
-<meta name="description" content="A one-minute shot from SoulShot. Tap to listen.">
-<meta property="og:title" content="A SoulShot, shared with you">
-<meta property="og:description" content="A one-minute shot. Tap to listen.">
+<meta name="description" content="One minute of spoken prayer, motivation or manifestation every morning, written from what you tell Sol. Press play.">
+<link rel="canonical" href="https://soulshot.online/">
+<meta property="og:type" content="website">
 <meta property="og:site_name" content="SoulShot">
-<meta name="twitter:card" content="summary">
+<meta property="og:title" content="SoulShot">
+<meta property="og:description" content="One minute, every morning, about your actual life. Prayer, motivation or manifestation, spoken to you.">
+<meta property="og:url" content="https://soulshot.online/">
+<meta property="og:image" content="https://soulshot.online/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#FFF4E6">
+<meta name="apple-itunes-app" content="app-id=6813150517">
+<link rel="icon" href="/img/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400;0,9..144,500;1,9..144,400&family=Figtree:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Figtree:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/site.css">
+<script>
+  // Shared shots used to open at the site root (?t=token). They now live at /s/.
+  (function(){var q=location.search;if(/[?&]t=/.test(q)){location.replace('/s/'+q+location.hash)}})();
+</script>
 <style>
-  :root{--plum:#3A1F3D;--night:#1E1424;--cream:#FFF4E6;--peach:#FFE0C2;--salmon:#F5A78D;--sun:#EE8E3E;--lane:#E9633C}
-  *{box-sizing:border-box}
-  html,body{margin:0;min-height:100%}
-  body{font-family:Figtree,-apple-system,"Segoe UI",sans-serif;color:var(--plum);background:linear-gradient(180deg,var(--cream) 0%,var(--peach) 38%,#FBBE9F 74%,var(--salmon) 100%) fixed;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:440px;margin:0 auto;padding:max(28px,env(safe-area-inset-top)) 24px 48px;min-height:100vh;display:flex;flex-direction:column}
-  .brand{display:flex;align-items:center;gap:10px;font-family:Fraunces,Georgia,serif;font-variation-settings:"SOFT" 60;font-weight:500;font-size:22px;letter-spacing:-.3px}
-  .orb{width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 38% 32%,#fff 0%,#FFEBD3 13%,#FDC58F 36%,#EE8E3E 66%,#C4611E 100%);box-shadow:0 10px 24px -8px rgba(200,100,30,.55);animation:breathe 4.4s ease-in-out infinite}
-  @keyframes breathe{50%{transform:scale(1.06)}}
-  .eyebrow{margin-top:56px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(58,31,61,.55)}
-  h1{font-family:Fraunces,Georgia,serif;font-variation-settings:"SOFT" 60;font-style:italic;font-weight:400;font-size:38px;line-height:1.08;letter-spacing:-.4px;margin:10px 0 0;text-wrap:balance;min-height:1.1em}
-  .lane{display:inline-block;align-self:flex-start;margin-top:8px;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.7);font-size:12px;font-weight:600;color:var(--lane);text-transform:capitalize}
-  .player{margin-top:28px;display:flex;align-items:center;gap:16px}
-  button.play{width:72px;height:72px;border-radius:50%;border:0;background:var(--plum);color:var(--cream);display:grid;place-items:center;cursor:pointer;box-shadow:0 18px 30px -14px rgba(58,31,61,.5);flex:0 0 auto}
-  button.play svg{width:26px;height:26px;fill:currentColor}
-  button.play .pause{display:none}
-  button.play.on .play{display:none}
-  button.play.on .pause{display:block}
-  .track{flex:1}
-  .bar{height:4px;border-radius:4px;background:rgba(58,31,61,.18);overflow:hidden}
-  .fill{height:100%;width:0;background:var(--plum);border-radius:4px;transition:width .2s linear}
-  .times{display:flex;justify-content:space-between;font-size:12px;color:rgba(58,31,61,.6);margin-top:8px;font-variant-numeric:tabular-nums}
-  .words{margin-top:36px;font-family:Fraunces,Georgia,serif;font-variation-settings:"SOFT" 60;font-size:22px;line-height:1.35;letter-spacing:-.2px}
-  .words p{margin:0 0 14px}
-  .quiet{color:rgba(58,31,61,.62)}
-  .get{margin-top:auto;padding-top:48px}
-  a.cta{display:flex;align-items:center;justify-content:center;height:56px;border-radius:999px;background:var(--plum);color:var(--cream);text-decoration:none;font-weight:600;font-size:17px;box-shadow:0 18px 30px -14px rgba(58,31,61,.5)}
-  .foot{margin-top:14px;text-align:center;font-size:13px;color:rgba(58,31,61,.6)}
-  .foot b{font-weight:600;color:var(--plum)}
-  [hidden]{display:none!important}
-  @media (prefers-reduced-motion:reduce){.fill{transition:none}.orb{animation:none}}
+  /* Only the landing page has these. */
+  .hero h1 em { font-style: italic; }
+  .badge-note { font-size: .92rem; color: var(--plum-2); }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="brand"><span class="orb"></span>SoulShot</div>
-  <div class="eyebrow" id="eyebrow">A shot, shared with you</div>
-  <h1 id="title"></h1>
-  <span class="lane" id="lane" hidden></span>
-  <div class="player" id="player" hidden>
-    <button class="play" id="play" aria-label="Play">
-      <svg class="play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-      <svg class="pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
-    </button>
-    <div class="track"><div class="bar"><div class="fill" id="fill"></div></div>
-      <div class="times"><span id="now">0:00</span><span id="end">1:15</span></div>
+<div class="sky">
+<header class="wrap">
+  <nav class="nav" aria-label="Site">
+    <a class="brand" href="/"><span class="orb" aria-hidden="true"></span>SoulShot</a>
+    <div class="nav-links">
+      <a class="plain" href="#how">How it works</a>
+      <a class="plain" href="/support/">Support</a>
+      <a class="btn sm" href="https://apps.apple.com/app/id6813150517">Get the app</a>
     </div>
-  </div>
-  <audio id="audio" preload="metadata"></audio>
-  <audio id="bed" preload="auto" loop></audio>
-  <div class="words" id="words"><p class="quiet">Opening…</p></div>
-  <div class="get">
-    <a class="cta" id="cta" href="https://apps.apple.com/app/id6813150517">Get SoulShot</a>
-    <div class="foot">Your own one-minute shot, every morning. <b>Prayer, motivation or manifestation.</b></div>
-  </div>
-</div>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <h1 id="hero-title">One minute, every morning, about your actual life.</h1>
+      <p class="lede">SoulShot is a spoken shot of prayer, motivation or manifestation. It is written from what you tell Sol, read to you in a voice you picked, and waiting when you wake up. Your only job is to press play.</p>
+      <div class="hero-cta">
+        <a class="btn" href="https://apps.apple.com/app/id6813150517">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.5 2-3.7 2.1-3.7-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.8-1.7 0-3.2 1-4.1 2.5-1.8 3-.5 7.6 1.3 10.1.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.3.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9-.1 0-2.9-1.1-2.9-4.2zM14 5.3c.7-.8 1.2-2 1-3.2-1 .1-2.2.7-2.9 1.5-.6.7-1.2 1.9-1.1 3.1 1.1.1 2.3-.6 3-1.4z"/></svg>
+          Download on the App Store
+        </a>
+        <span class="hero-price">$5.99 a week. Cancel any time.</span>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="orb-video" aria-hidden="true">
+        <video autoplay muted loop playsinline src="/img/orb.mp4"></video>
+      </div>
+      <div class="glow" aria-hidden="true"></div>
+      <div class="phone">
+        <img src="/img/home.jpg" width="1000" height="2174" alt="The SoulShot home screen: the orb, the question ‘Where’s your energy right now, one to ten?’, and today’s shot ready to play." fetchpriority="high">
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how" aria-labelledby="how-title">
+    <div class="section-head">
+      <h2 id="how-title">The coach asks. The shot gives.</h2>
+      <p class="lede">Sol never hands you advice. It asks one question at a time and keeps your own words. Those words are what the shot is made of.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="phone sm"><img src="/img/thread.jpg" width="1000" height="2164" alt="A thread with Sol: it asks how the interview feels, you answer, it asks what you already know you’ll do well." loading="lazy"></div>
+        <div>
+          <div class="step-num">First</div>
+          <h3>Sol asks one question.</h3>
+          <p>Where your energy is, what is on your mind, what you already know you will do well. Type, or hold to talk. Two or three answers is plenty.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="phone sm"><img src="/img/player.jpg" width="1000" height="2164" alt="The player: a dark photo, the orb, the shot’s words lighting up line by line as they are spoken." loading="lazy"></div>
+        <div>
+          <div class="step-num">Then</div>
+          <h3>Your words become the shot.</h3>
+          <p>A minute is written from what you said, read in the voice you chose over quiet music, with your words on screen as they are spoken. Overnight, or right when you ask for it.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="phone sm"><img src="/img/library.jpg" width="1000" height="2164" alt="The library: every shot kept as a photo card, with the ones you hearted." loading="lazy"></div>
+        <div>
+          <div class="step-num">Every morning</div>
+          <h3>Press play.</h3>
+          <p>A notification carries the first line. The widget plays it from your home screen. Every shot stays in your library, and the ones that landed get a heart.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="lanes" aria-labelledby="lanes-title">
+    <div class="section-head">
+      <h2 id="lanes-title">Three kinds of shot. You pick the lane.</h2>
+      <p class="lede">The titles are your own words, pulled from what you told Sol. Nothing generic, nothing you could have found on a poster.</p>
+    </div>
+    <div class="lanes">
+      <div class="shot prayer">
+        <img src="/img/prayer.jpg" alt="" loading="lazy">
+        <div class="lane">Prayer</div>
+        <div class="title">Before the wedding budget</div>
+        <p class="desc">In your own voice, to God as you understand God. It never speaks as God and never claims to know God’s will.</p>
+        <div class="meta"><span class="dur">1:10</span></div>
+      </div>
+      <div class="shot motivation">
+        <img src="/img/motivation.jpg" alt="" loading="lazy">
+        <div class="lane">Motivation</div>
+        <div class="title">The run before work</div>
+        <p class="desc">A push for the one thing in front of you today, from someone who remembers what you said about it yesterday.</p>
+        <div class="meta"><span class="dur">1:15</span></div>
+      </div>
+      <div class="shot manifestation">
+        <img src="/img/manifestation.jpg" alt="" loading="lazy">
+        <div class="lane">Manifestation</div>
+        <div class="title">The apartment with the window</div>
+        <p class="desc">A clear picture of where you are going, in the present tense. No promises of cures, money or dates.</p>
+        <div class="meta"><span class="dur">1:05</span></div>
+      </div>
+    </div>
+
+    <div class="words">
+      <div class="script" aria-label="Sample shot">
+        <p>Jap, it’s almost two o’clock.</p>
+        <p class="now">You walk in already ready.</p>
+        <p>Nobody in that room knows the product the way you do.</p>
+        <small>A motivation shot, thirty seconds before an interview. Written from two answers in the thread that morning.</small>
+      </div>
+      <div class="phone sm"><img src="/img/player.jpg" width="1000" height="2164" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <section class="section" id="ritual" aria-labelledby="ritual-title">
+    <div class="section-head">
+      <h2 id="ritual-title">Effort optional. Uplift guaranteed.</h2>
+      <p class="lede">The app never demands anything. Talk to Sol when you feel like it. On the days you don’t, the shot still arrives.</p>
+    </div>
+    <div class="ritual">
+      <div>
+        <h3>Your moments, not ours.</h3>
+        <p>Choose when a shot should reach you: before the commute, after the kids are down, whenever. The notification carries the first line, so you know what is waiting.</p>
+      </div>
+      <div>
+        <h3>A streak that forgives.</h3>
+        <p>Missed a day, or a week? You are met with a shot, not a lecture. There is no guilt anywhere in this app.</p>
+      </div>
+      <div>
+        <h3>Sol remembers.</h3>
+        <p>The person you mentioned, the date that matters, the thing you are afraid of. You can see everything it keeps, and delete any of it, under Profile.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="price" aria-labelledby="price-title">
+    <div class="price">
+      <div>
+        <h2 id="price-title">One plan.</h2>
+        <div class="amount" style="margin-top:18px">$5.99<span>a week</span></div>
+        <p>Every shot costs a writer and a voice, so there is no free tier. Billed through your Apple ID. Cancel any time in your iPhone’s settings and keep access until the week ends.</p>
+        <a class="btn" href="https://apps.apple.com/app/id6813150517" style="margin-top:26px">Download on the App Store</a>
+      </div>
+      <ul>
+        <li>A new spoken shot every day, about your life</li>
+        <li>Prayer, motivation and manifestation, in the voice you choose</li>
+        <li>Sol, a coach that asks and remembers</li>
+        <li>Cards, a home-screen widget and notifications at your moments</li>
+        <li>Delete your account, and everything in it, whenever you like</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <h2 id="faq-title">Questions people ask</h2>
+    <div class="faq">
+      <details>
+        <summary>Is Sol a therapist?</summary>
+        <p>No. Sol is a coach that asks questions and keeps your answers. SoulShot is not medical, psychological, financial or legal advice. If something you write suggests you may be in danger, the app shows support resources instead of a reply.</p>
+      </details>
+      <details>
+        <summary>Does a prayer shot speak as God?</summary>
+        <p>Never. A prayer shot is written in your own voice, addressed to God as you understand God. It does not claim to know God’s will, and you can tell Sol your tradition so the words fit.</p>
+      </details>
+      <details>
+        <summary>What happens to what I tell Sol?</summary>
+        <p>It is used for one thing: to write your shots. Entries are stored encrypted and only your account can read them. We do not sell your information or use it for ads. The <a href="/privacy/">Privacy Policy</a> lists every company that touches it and why.</p>
+      </details>
+      <details>
+        <summary>How do I cancel?</summary>
+        <p>In your iPhone’s Settings: tap your name, then Subscriptions, then SoulShot. Cancel at least 24 hours before the week ends to avoid the next charge. You keep access until then.</p>
+      </details>
+      <details>
+        <summary>How do I delete my account?</summary>
+        <p>Profile, then Delete account. It removes every entry, every shot and its audio, and everything Sol remembered. It cannot be undone, and it does not cancel your subscription, so cancel first.</p>
+      </details>
+      <details>
+        <summary>Can I share a shot?</summary>
+        <p>Yes. Tap Share in the player and you get a link anyone can open in a browser, no app needed. Only that one shot is on the link.</p>
+      </details>
+    </div>
+  </section>
+</main>
+
 <script>
-(function(){
-  // The shot comes from the SoulShot backend by its share token; only shots
-  // their owner shared have one, and the link names nothing else.
-  var API='https://uipfkozpxhfnmvrdkhsc.supabase.co/functions/v1/share/';
-  var LANE={prayer:'#D9A23F',motivation:'#E9633C',manifestation:'#7F63C8'};
-  var q=new URLSearchParams(location.search);
-  var token=q.get('t')||(location.hash||'').replace(/^#/,'');
-  var $=function(id){return document.getElementById(id)};
-  function fmt(s){s=Math.max(0,Math.round(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
-  function notFound(){
-    $('eyebrow').textContent='Not found';
-    $('title').textContent='This shot isn’t here';
-    $('words').innerHTML='<p class="quiet">It may have been unshared. Make your own in SoulShot.</p>';
-  }
-  if(!token||!/^[A-Za-z0-9_-]{6,64}$/.test(token)){notFound();return}
-  fetch(API+encodeURIComponent(token)+'?format=json',{headers:{accept:'application/json'}})
-    .then(function(r){if(!r.ok)throw new Error(String(r.status));return r.json()})
-    .then(function(shot){
-      document.title=shot.title+' · SoulShot';
-      $('title').textContent=shot.title;
-      var lane=$('lane');lane.textContent=shot.lane;lane.style.color=LANE[shot.lane]||LANE.motivation;lane.hidden=false;
-      var words=$('words');words.innerHTML='';
-      String(shot.script||'').split(/(?<=[.!?…]["'”’)\]]*)\s+/).forEach(function(s){s=s.trim();if(!s)return;var p=document.createElement('p');p.textContent=s;words.appendChild(p)});
-      if(shot.appStoreUrl)$('cta').href=shot.appStoreUrl;
-      if(!shot.audioUrl)return;
-      var a=$('audio'),b=$('play'),f=$('fill'),n=$('now'),m=$('bed');
-      a.src=shot.audioUrl;
-      // The music under the voice, as the app plays it: the delivery's own
-      // bed, looping quietly, in with the voice and out with the last word.
-      var bed=shot.bed&&shot.bed.url?shot.bed:null,gain=bed?Math.max(0,Math.min(1,bed.gain||0.3)):0,fade=null;
-      if(bed){m.src=bed.url;m.volume=gain}
-      function ramp(to,ms,done){if(!bed)return;clearInterval(fade);var from=m.volume,steps=10,i=0;fade=setInterval(function(){i++;m.volume=Math.max(0,Math.min(1,from+(to-from)*i/steps));if(i>=steps){clearInterval(fade);done&&done()}},ms/steps)}
-      $('end').textContent=fmt(shot.durationSeconds||75);
-      $('player').hidden=false;
-      b.addEventListener('click',function(){if(a.paused){a.play()}else{a.pause()}});
-      a.addEventListener('play',function(){b.classList.add('on');b.setAttribute('aria-label','Pause');if(bed){m.volume=0;m.play().catch(function(){});ramp(gain,900)}});
-      a.addEventListener('pause',function(){b.classList.remove('on');b.setAttribute('aria-label','Play');if(bed&&!a.ended)ramp(0,400,function(){m.pause()})});
-      a.addEventListener('loadedmetadata',function(){if(a.duration)$('end').textContent=fmt(a.duration)});
-      a.addEventListener('timeupdate',function(){if(a.duration){f.style.width=(a.currentTime/a.duration*100)+'%';n.textContent=fmt(a.currentTime)}});
-      a.addEventListener('ended',function(){f.style.width='100%';if(bed)ramp(0,1500,function(){m.pause();m.currentTime=0})});
-    })
-    .catch(notFound);
-})();
+  // Some browsers hold a muted autoplay until the page is settled; ask once more.
+  (function(){var v=document.querySelector(".orb-video video");if(!v)return;var go=function(){v.play().catch(function(){})};if(v.readyState>=2)go();else v.addEventListener("canplay",go,{once:true})})();
 </script>
+
+<footer class="wrap">
+  <div class="foot">
+    <div>© 2026 SoulShot</div>
+    <nav aria-label="Legal">
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+      <a href="/support/">Support</a>
+      <a href="mailto:support@soulshot.online">support@soulshot.online</a>
+    </nav>
+  </div>
+</footer>
+</div>
 </body>
 </html>

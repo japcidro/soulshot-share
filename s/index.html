@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A shot, shared with you · SoulShot</title>
+<meta name="description" content="A one-minute shot from SoulShot. Tap to listen.">
+<meta property="og:title" content="A SoulShot, shared with you">
+<meta property="og:description" content="A one-minute shot. Tap to listen.">
+<meta property="og:site_name" content="SoulShot">
+<meta name="twitter:card" content="summary">
+<meta property="og:url" content="https://soulshot.online/s/">
+<link rel="icon" href="/img/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta name="apple-itunes-app" content="app-id=6813150517">
+<meta name="theme-color" content="#FFF4E6">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400;0,9..144,500;1,9..144,400&family=Figtree:wght@400;500;600&display=swap">
+<style>
+  :root{--plum:#3A1F3D;--night:#1E1424;--cream:#FFF4E6;--peach:#FFE0C2;--salmon:#F5A78D;--sun:#EE8E3E;--lane:#E9633C}
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%}
+  body{font-family:Figtree,-apple-system,"Segoe UI",sans-serif;color:var(--plum);background:linear-gradient(180deg,var(--cream) 0%,var(--peach) 38%,#FBBE9F 74%,var(--salmon) 100%) fixed;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:440px;margin:0 auto;padding:max(28px,env(safe-area-inset-top)) 24px 48px;min-height:100vh;display:flex;flex-direction:column}
+  .brand{display:flex;align-items:center;gap:10px;font-family:Fraunces,Georgia,serif;font-variation-settings:"SOFT" 60;font-weight:500;font-size:22px;letter-spacing:-.3px}
+  .orb{width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 38% 32%,#fff 0%,#FFEBD3 13%,#FDC58F 36%,#EE8E3E 66%,#C4611E 100%);box-shadow:0 10px 24px -8px rgba(200,100,30,.55);animation:breathe 4.4s ease-in-out infinite}
+  @keyframes breathe{50%{transform:scale(1.06)}}
+  .eyebrow{margin-top:56px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(58,31,61,.55)}
+  h1{font-family:Fraunces,Georgia,serif;font-variation-settings:"SOFT" 60;font-style:italic;font-weight:400;font-size:38px;line-height:1.08;letter-spacing:-.4px;margin:10px 0 0;text-wrap:balance;min-height:1.1em}
+  .lane{display:inline-block;align-self:flex-start;margin-top:8px;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.7);font-size:12px;font-weight:600;color:var(--lane);text-transform:capitalize}
+  .player{margin-top:28px;display:flex;align-items:center;gap:16px}
+  button.play{width:72px;height:72px;border-radius:50%;border:0;background:var(--plum);color:var(--cream);display:grid;place-items:center;cursor:pointer;box-shadow:0 18px 30px -14px rgba(58,31,61,.5);flex:0 0 auto}
+  button.play svg{width:26px;height:26px;fill:currentColor}
+  button.play .pause{display:none}
+  button.play.on .play{display:none}
+  button.play.on .pause{display:block}
+  .track{flex:1}
+  .bar{height:4px;border-radius:4px;background:rgba(58,31,61,.18);overflow:hidden}
+  .fill{height:100%;width:0;background:var(--plum);border-radius:4px;transition:width .2s linear}
+  .times{display:flex;justify-content:space-between;font-size:12px;color:rgba(58,31,61,.6);margin-top:8px;font-variant-numeric:tabular-nums}
+  .words{margin-top:36px;font-family:Fraunces,Georgia,serif;font-variation-settings:"SOFT" 60;font-size:22px;line-height:1.35;letter-spacing:-.2px}
+  .words p{margin:0 0 14px}
+  .quiet{color:rgba(58,31,61,.62)}
+  .get{margin-top:auto;padding-top:48px}
+  a.cta{display:flex;align-items:center;justify-content:center;height:56px;border-radius:999px;background:var(--plum);color:var(--cream);text-decoration:none;font-weight:600;font-size:17px;box-shadow:0 18px 30px -14px rgba(58,31,61,.5)}
+  .foot{margin-top:14px;text-align:center;font-size:13px;color:rgba(58,31,61,.6)}
+  .foot b{font-weight:600;color:var(--plum)}
+  .foot.links{margin-top:22px}.foot.links a{color:inherit;text-decoration:none}.foot.links a:hover{text-decoration:underline}
+  [hidden]{display:none!important}
+  @media (prefers-reduced-motion:reduce){.fill{transition:none}.orb{animation:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="brand" href="/" style="text-decoration:none;color:inherit"><span class="orb"></span>SoulShot</a>
+  <div class="eyebrow" id="eyebrow">A shot, shared with you</div>
+  <h1 id="title"></h1>
+  <span class="lane" id="lane" hidden></span>
+  <div class="player" id="player" hidden>
+    <button class="play" id="play" aria-label="Play">
+      <svg class="play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+    </button>
+    <div class="track"><div class="bar"><div class="fill" id="fill"></div></div>
+      <div class="times"><span id="now">0:00</span><span id="end">1:15</span></div>
+    </div>
+  </div>
+  <audio id="audio" preload="metadata"></audio>
+  <audio id="bed" preload="auto" loop></audio>
+  <div class="words" id="words"><p class="quiet">Opening…</p></div>
+  <div class="get">
+    <a class="cta" id="cta" href="https://apps.apple.com/app/id6813150517">Get SoulShot</a>
+    <div class="foot">Your own one-minute shot, every morning. <b>Prayer, motivation or manifestation.</b></div>
+    <div class="foot links"><a href="/">soulshot.online</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="/support/">Support</a></div>
+  </div>
+</div>
+<script>
+(function(){
+  // The shot comes from the SoulShot backend by its share token; only shots
+  // their owner shared have one, and the link names nothing else.
+  var API='https://uipfkozpxhfnmvrdkhsc.supabase.co/functions/v1/share/';
+  var LANE={prayer:'#D9A23F',motivation:'#E9633C',manifestation:'#7F63C8'};
+  var q=new URLSearchParams(location.search);
+  var token=q.get('t')||(location.hash||'').replace(/^#/,'');
+  var $=function(id){return document.getElementById(id)};
+  function fmt(s){s=Math.max(0,Math.round(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+  function notFound(){
+    $('eyebrow').textContent='Not found';
+    $('title').textContent='This shot isn’t here';
+    $('words').innerHTML='<p class="quiet">It may have been unshared. Make your own in SoulShot.</p>';
+  }
+  if(!token||!/^[A-Za-z0-9_-]{6,64}$/.test(token)){notFound();return}
+  fetch(API+encodeURIComponent(token)+'?format=json',{headers:{accept:'application/json'}})
+    .then(function(r){if(!r.ok)throw new Error(String(r.status));return r.json()})
+    .then(function(shot){
+      document.title=shot.title+' · SoulShot';
+      $('title').textContent=shot.title;
+      var lane=$('lane');lane.textContent=shot.lane;lane.style.color=LANE[shot.lane]||LANE.motivation;lane.hidden=false;
+      var words=$('words');words.innerHTML='';
+      String(shot.script||'').split(/(?<=[.!?…]["'”’)\]]*)\s+/).forEach(function(s){s=s.trim();if(!s)return;var p=document.createElement('p');p.textContent=s;words.appendChild(p)});
+      if(shot.appStoreUrl)$('cta').href=shot.appStoreUrl;
+      if(!shot.audioUrl)return;
+      var a=$('audio'),b=$('play'),f=$('fill'),n=$('now'),m=$('bed');
+      a.src=shot.audioUrl;
+      // The music under the voice, as the app plays it: the delivery's own
+      // bed, looping quietly, in with the voice and out with the last word.
+      var bed=shot.bed&&shot.bed.url?shot.bed:null,gain=bed?Math.max(0,Math.min(1,bed.gain||0.3)):0,fade=null;
+      if(bed){m.src=bed.url;m.volume=gain}
+      function ramp(to,ms,done){if(!bed)return;clearInterval(fade);var from=m.volume,steps=10,i=0;fade=setInterval(function(){i++;m.volume=Math.max(0,Math.min(1,from+(to-from)*i/steps));if(i>=steps){clearInterval(fade);done&&done()}},ms/steps)}
+      $('end').textContent=fmt(shot.durationSeconds||75);
+      $('player').hidden=false;
+      b.addEventListener('click',function(){if(a.paused){a.play()}else{a.pause()}});
+      a.addEventListener('play',function(){b.classList.add('on');b.setAttribute('aria-label','Pause');if(bed){m.volume=0;m.play().catch(function(){});ramp(gain,900)}});
+      a.addEventListener('pause',function(){b.classList.remove('on');b.setAttribute('aria-label','Play');if(bed&&!a.ended)ramp(0,400,function(){m.pause()})});
+      a.addEventListener('loadedmetadata',function(){if(a.duration)$('end').textContent=fmt(a.duration)});
+      a.addEventListener('timeupdate',function(){if(a.duration){f.style.width=(a.currentTime/a.duration*100)+'%';n.textContent=fmt(a.currentTime)}});
+      a.addEventListener('ended',function(){f.style.width='100%';if(bed)ramp(0,1500,function(){m.pause();m.currentTime=0})});
+    })
+    .catch(notFound);
+})();
+</script>
+</body>
+</html>
