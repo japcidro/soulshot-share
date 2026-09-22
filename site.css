@@ -282,3 +282,17 @@ p { margin: 0; }
 .contact-card .email { font-family: var(--serif); font-size: 1.6rem; word-break: break-all; }
 .contact-card p { margin-top: 10px; color: var(--plum-2); }
 .contact-card .btn { margin-top: 18px; }
+
+/* Samples: the three playable cards under the hero. ------------------------ */
+.hero-copy .hero-price { margin-top: 18px; }
+.shot .bar { height: 3px; border-radius: 3px; background: rgba(255, 244, 230, .28); margin-top: 16px; overflow: hidden; }
+.shot .bar i { display: block; height: 100%; width: 0; background: var(--cream); transition: width .25s linear; }
+.shot.sample .meta { margin-top: 12px; }
+.shot .play { border: 0; cursor: pointer; transition: transform .15s ease; }
+.shot .play:hover { transform: scale(1.06); }
+.shot .play .ic-pause { display: none; }
+.shot.playing .play .ic-play { display: none; }
+.shot.playing .play .ic-pause { display: block; margin-left: 0; }
+.shot.still .play, .shot.still .bar { display: none; }
+
+@media (prefers-reduced-motion: reduce) { .shot .bar i { transition: none; } }
