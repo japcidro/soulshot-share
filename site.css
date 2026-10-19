@@ -227,6 +227,8 @@ p { margin: 0; }
 }
 .price .amount { font-family: var(--serif); font-size: clamp(3rem, 7vw, 5rem); line-height: 1; }
 .price .amount span { font-family: var(--sans); font-size: 1.1rem; color: rgba(255, 244, 230, .7); margin-left: 6px; }
+.price .amount.alt { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-top: 10px; }
+.price .amount.alt span { font-size: 1rem; }
 .price p { color: rgba(255, 244, 230, .82); margin-top: 14px; max-width: 30rem; }
 .price .btn { background: var(--cream); color: var(--plum); }
 .price ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
