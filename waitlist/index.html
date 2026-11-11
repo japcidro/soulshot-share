@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SoulShot: one minute a day, made for you</title>
+<meta name="description" content="SoulShot is an iPhone app that makes you a one-minute audio every morning, from what you tell it. Opening soon. Join the waitlist.">
+<link rel="canonical" href="https://soulshot.online/waitlist/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SoulShot">
+<meta property="og:title" content="The voice in your head isn’t always on your side. This one is.">
+<meta property="og:description" content="A one-minute audio made for you every morning, from what you tell it. Opening soon on iPhone. Join the waitlist.">
+<meta property="og:url" content="https://soulshot.online/waitlist/">
+<meta property="og:image" content="https://soulshot.online/waitlist/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FBFAFC">
+<link rel="icon" href="img/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600&family=Fraunces:opsz,wght,SOFT@9..144,400,50&display=swap">
+<link rel="stylesheet" href="site.css">
+<script>
+  // Shared shots used to open at the site root (?t=token). They now live at /s/.
+  (function(){var q=location.search;if(/[?&]t=/.test(q)){location.replace('s/'+q+location.hash)}})();
+
+  // The one switch for launch day. While `live` is false the page collects
+  // emails; set it to true and every form becomes the App Store button.
+  window.SOULSHOT = {
+    live: false,
+    appStore: 'https://apps.apple.com/app/id6813150517',
+    api: 'https://uipfkozpxhfnmvrdkhsc.supabase.co/functions/v1/waitlist'
+  };
+  // Which version of the page this is: soulshot.online/?for=prayer or ?for=manifest
+  // (also reached as /prayer/ and /manifest/). Set before first paint so the right words show.
+  (function(){
+    var f=(new URLSearchParams(location.search).get('for')||'').toLowerCase();
+    document.documentElement.dataset.for=(f==='prayer'||f==='manifest')?f:'main';
+    if(window.SOULSHOT.live)document.documentElement.classList.add('is-live');
+  })();
+</script>
+</head>
+<body class="has-dock">
+<div class="sky">
+<header class="wrap">
+  <nav class="nav" aria-label="Site">
+    <a class="brand" href="./"><span class="orb" aria-hidden="true"></span>SoulShot</a>
+    <div class="nav-links">
+      <a class="plain" href="#how">How it works</a>
+      <a class="plain" href="#answers">Before you join</a>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <h1 id="hero-title"
+          data-prayer="When you can’t find the words to pray, press play."
+          data-manifest="Say where you’re going out loud, every morning.">The voice in your head isn’t always on your side. This one is.</h1>
+      <p class="lede"
+         data-prayer="SoulShot is an iPhone app that makes you a one-minute prayer every morning. You tell it what you’re carrying. It prays over your day, out loud, in a voice you pick."
+         data-manifest="SoulShot is an iPhone app that makes you a one-minute audio every morning. You tell it where you’re headed. It says it back to you, out loud, in a voice you pick.">SoulShot is an iPhone app that makes you a one-minute audio every morning. You tell it what’s on your mind. It talks back, out loud, about your day and nobody else’s.</p>
+
+      <form class="join" data-join novalidate>
+        <label for="email-top">Opening soon. Leave your email and we’ll tell you the day it does.</label>
+        <div class="field">
+          <input id="email-top" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="you@example.com" required>
+          <button class="btn" type="submit">Join the waitlist</button>
+        </div>
+        <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="form-note">One email when it opens. It will cost $5.99 a week.</p>
+        <p class="form-error" role="alert" hidden></p>
+      </form>
+
+      <div class="get">
+        <a class="btn" data-appstore href="https://apps.apple.com/app/id6813150517">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.5 2-3.7 2.1-3.7-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.8-1.7 0-3.2 1-4.1 2.5-1.8 3-.5 7.6 1.3 10.1.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.3.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9-.1 0-2.9-1.1-2.9-4.2zM14 5.3c.7-.8 1.2-2 1-3.2-1 .1-2.2.7-2.9 1.5-.6.7-1.2 1.9-1.1 3.1 1.1.1 2.3-.6 3-1.4z"/></svg>
+          Download on the App Store
+        </a>
+        <p>Subscription required: $5.99 a week, or $59.99 a year with the first 3 days free.</p>
+      </div>
+    </div>
+
+    <div class="stage" id="listen">
+      <div class="orb-live" aria-hidden="true">
+        <svg viewBox="0 0 400 400" role="presentation">
+          <defs>
+            <radialGradient id="g-halo" gradientUnits="userSpaceOnUse" cx="200" cy="200" r="200">
+              <stop offset="0" stop-color="#D9CCF6" stop-opacity=".04"/>
+              <stop offset=".48" stop-color="#D9CCF6" stop-opacity=".3"/>
+              <stop offset="1" stop-color="#D9CCF6" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="g-core" gradientUnits="userSpaceOnUse" cx="200" cy="200" r="97">
+              <stop offset="0" stop-color="#D9CCF6" stop-opacity=".18"/>
+              <stop offset=".74" stop-color="#D9CCF6" stop-opacity=".05"/>
+              <stop offset="1" stop-color="#D9CCF6" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="g-band" gradientUnits="userSpaceOnUse" cx="200" cy="200" r="101">
+              <stop offset=".58" stop-color="#FFF0F6"/>
+              <stop offset=".72" stop-color="#F6D6EC"/>
+              <stop offset=".86" stop-color="#D9CCF6"/>
+              <stop offset="1" stop-color="#A892E0"/>
+            </radialGradient>
+            <linearGradient id="g-spec" gradientUnits="userSpaceOnUse" x1="100" y1="100" x2="300" y2="300">
+              <stop offset="0" stop-color="#C9B8F0"/>
+              <stop offset=".3" stop-color="#F2C4E0"/>
+              <stop offset=".55" stop-color="#FFD9C4"/>
+              <stop offset=".8" stop-color="#BFC8F6"/>
+              <stop offset="1" stop-color="#C9B8F0"/>
+            </linearGradient>
+          </defs>
+          <circle cx="200" cy="200" r="200" fill="url(#g-halo)"/>
+          <circle cx="200" cy="200" r="97" fill="url(#g-core)"/>
+          <path id="orb-band" fill="url(#g-band)" fill-rule="evenodd"/>
+          <path id="orb-spec" fill="url(#g-spec)" fill-rule="evenodd" opacity=".55"/>
+        </svg>
+      </div>
+
+      <div class="screen">
+        <h2 class="ask" id="ask"
+            data-prayer="What are you carrying today?"
+            data-manifest="What’s between you and where you’re going?">What’s been in your way lately?</h2>
+        <div class="lyrics" id="lyrics" hidden><div class="lyrics-roll" id="lyrics-roll"></div></div>
+      </div>
+
+      <div class="transport" id="transport" hidden>
+        <button class="toggle" id="toggle" type="button" aria-label="Pause">
+          <svg class="ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="ic-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+        </button>
+        <div class="track" aria-hidden="true"><i id="progress"></i></div>
+        <span class="left" id="left" aria-hidden="true"></span>
+      </div>
+      <p class="piece" id="piece" hidden></p>
+
+      <div class="chips" role="group" aria-label="Pick one to hear a minute about it">
+        <button class="chip" type="button" data-sample="doubt" aria-pressed="false">I doubt myself</button>
+        <button class="chip" type="button" data-sample="later" aria-pressed="false">I keep putting it off</button>
+        <button class="chip" type="button" data-sample="tired" aria-pressed="false">I’m worn out</button>
+      </div>
+      <p class="hint" id="hint">Tap one and hear a minute about it. Sound on.</p>
+      <p class="fine"
+         data-prayer="These three are from the app’s library; they are not prayers. Your prayer is written each morning about your own day."
+         >These three are from the app’s library. Yours is written each morning from what you tell it.</p>
+      <audio id="voice" preload="none" playsinline></audio>
+    </div>
+  </section>
+
+  <section class="section" id="how" aria-labelledby="how-title">
+    <h2 id="how-title">How it works</h2>
+    <ol class="steps">
+      <li>
+        <h3>It asks one small question.</h3>
+        <p data-prayer="“What are you carrying today?” Type a sentence, or hold the button and say it. That is all the effort there is."
+           >“Where’s your head today?” Type a sentence, or hold the button and say it. That is all the effort there is.</p>
+      </li>
+      <li>
+        <h3 data-prayer="Your answer becomes a prayer.">Your answer becomes a minute.</h3>
+        <p data-prayer="It is written from your own words and prayed aloud over quiet music, in the voice you picked. Your name, your day, the people you mentioned."
+           >It is written from your own words and read aloud over quiet music, in the voice you picked. The words show on screen as they are spoken.</p>
+      </li>
+      <li>
+        <h3>Every morning, it is waiting.</h3>
+        <p>Press play. On the days you skip the question, your minute still comes.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="section" id="kinds" aria-labelledby="kinds-title" data-only="main">
+    <h2 id="kinds-title">Pick the kind of minute you need</h2>
+    <p class="lede">You choose one when you start, and you can change it any day.</p>
+    <div class="kinds">
+      <div class="kind push">
+        <h3>A push</h3>
+        <p>For the days you need someone to say it straight. Soft, steady or loud; you set how hard.</p>
+      </div>
+      <div class="kind prayer">
+        <h3>A prayer</h3>
+        <p>Prayed over your day, in your tradition. It is said to God for you. It never speaks as God.</p>
+      </div>
+      <div class="kind future">
+        <h3>A picture of where you’re going</h3>
+        <p>Your future, said out loud in your own words. No promises about money, cures or dates.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="answers" aria-labelledby="answers-title">
+    <h2 id="answers-title">Before you join, the plain facts</h2>
+    <div class="answers">
+      <div>
+        <h3>It is a paid app.</h3>
+        <p>$5.99 a week, about 86¢ a day. Or $59.99 a year, which is 16¢ a day. There is no free version, because every minute costs a writer and a voice. You see the price again before you pay anything.</p>
+      </div>
+      <div>
+        <h3>AI makes it.</h3>
+        <p>Each minute is written and voiced by AI, from your own words, inside rules about what it may say. What you write is stored encrypted and used for one thing: writing your minutes.</p>
+      </div>
+      <div data-only="main prayer">
+        <h3>A prayer never speaks as God.</h3>
+        <p>It is addressed to God as you understand God, in the tradition you choose. It does not claim to know God’s will.</p>
+      </div>
+      <div>
+        <h3>It is not therapy.</h3>
+        <p>It is a minute of encouragement. If what you write suggests you may be in danger, it shows you support resources instead.</p>
+      </div>
+      <div>
+        <h3>Nothing nags you.</h3>
+        <p>Miss a day or a month and you are met with a minute, not a lecture. There is no streak to buy back.</p>
+      </div>
+      <div>
+        <h3>What joining the list means.</h3>
+        <p>One email the day the app opens on iPhone. We do not sell or share your address. To come off the list, write to <a href="mailto:hello@soulshot.online">hello@soulshot.online</a>. More in the <a href="privacy/">privacy policy</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section closing" aria-labelledby="closing-title">
+    <h2 id="closing-title">Be there the day it opens.</h2>
+    <form class="join" data-join novalidate>
+      <label for="email-end">Your email</label>
+      <div class="field">
+        <input id="email-end" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="you@example.com" required>
+        <button class="btn" type="submit">Join the waitlist</button>
+      </div>
+      <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="form-note">One email when it opens. It will cost $5.99 a week.</p>
+      <p class="form-error" role="alert" hidden></p>
+    </form>
+    <div class="get">
+      <a class="btn" data-appstore href="https://apps.apple.com/app/id6813150517">Download on the App Store</a>
+      <p>Subscription required: $5.99 a week, or $59.99 a year with the first 3 days free.</p>
+    </div>
+  </section>
+</main>
+
+<!-- Shown where the form was, once someone has joined. -->
+<template id="after-template">
+  <div class="after" tabindex="-1">
+    <p class="after-head">You’re on the list.</p>
+    <p class="after-sub" data-after-sub>We’ll email you the day it opens.</p>
+    <div class="after-q" data-q="lane">
+      <p>Which would you press play on first?</p>
+      <div class="picks">
+        <button class="pick" type="button" data-lane="motivation">A push</button>
+        <button class="pick" type="button" data-lane="prayer">A prayer</button>
+        <button class="pick" type="button" data-lane="manifestation">A picture of where I’m going</button>
+      </div>
+    </div>
+    <div class="after-q" data-q="price" hidden>
+      <p>It will cost $5.99 a week. Is that okay for you?</p>
+      <div class="picks">
+        <button class="pick" type="button" data-price="yes">Yes</button>
+        <button class="pick" type="button" data-price="maybe">Maybe</button>
+        <button class="pick" type="button" data-price="no">No</button>
+      </div>
+    </div>
+    <div class="after-q" data-q="share" hidden>
+      <p>Know someone who needs a minute like that?</p>
+      <div class="share-row">
+        <button class="btn" type="button" data-share>Send them this page</button>
+        <span class="share-done" data-share-done role="status"></span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<div class="dock" id="dock">
+  <button class="btn" type="button" id="dock-join">Join the waitlist</button>
+</div>
+
+<footer class="wrap">
+  <div class="foot">
+    <div>© 2026 SoulShot</div>
+    <nav aria-label="Legal">
+      <a href="privacy/">Privacy</a>
+      <a href="terms/">Terms</a>
+      <a href="support/">Support</a>
+      <a href="mailto:hello@soulshot.online">hello@soulshot.online</a>
+    </nav>
+  </div>
+</footer>
+</div>
+
+<script src="samples.js"></script>
+<script src="wait.js"></script>
+</body>
+</html>
