@@ -117,6 +117,8 @@
         </svg>
       </div>
 
+      <p class="said" id="said" hidden></p>
+
       <div class="screen">
         <h2 class="ask" id="ask"
             data-prayer="What are you carrying today?"
@@ -134,15 +136,15 @@
       </div>
       <p class="piece" id="piece" hidden></p>
 
-      <div class="chips" role="group" aria-label="Pick one to hear a minute about it">
-        <button class="chip" type="button" data-sample="doubt" aria-pressed="false">I doubt myself</button>
-        <button class="chip" type="button" data-sample="later" aria-pressed="false">I keep putting it off</button>
-        <button class="chip" type="button" data-sample="tired" aria-pressed="false">I’m worn out</button>
+      <div class="chips" role="group" aria-label="Pick one to hear the minute the app made for it">
+        <button class="chip" type="button" data-sample="behind" aria-pressed="false">I feel behind</button>
+        <button class="chip" type="button" data-sample="enough" aria-pressed="false">I’m not good enough</button>
+        <button class="chip" type="button" data-sample="overthink" aria-pressed="false">I overthink everything</button>
+        <button class="chip" type="button" data-sample="restart" aria-pressed="false">I keep starting over</button>
+        <button class="chip" type="button" data-sample="prayer" aria-pressed="false">Pray for me</button>
       </div>
-      <p class="hint" id="hint">Tap one and hear a minute about it. Sound on.</p>
-      <p class="fine"
-         data-prayer="These three are from the app’s library; they are not prayers. Your prayer is written each morning about your own day."
-         >These three are from the app’s library. Yours is written each morning from what you tell it.</p>
+      <p class="hint" id="hint">Tap one. Hear the minute the app made for someone who said it.</p>
+      <p class="fine">These are real shots from the app. We typed in two sentences for each person; the app wrote and spoke the rest. Yours is made from what you tell it.</p>
       <audio id="voice" preload="none" playsinline></audio>
     </div>
   </section>

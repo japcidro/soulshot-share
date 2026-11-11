@@ -166,7 +166,16 @@
   var left = document.getElementById('left')
   var piece = document.getElementById('piece')
   var hint = document.getElementById('hint')
+  var said = document.getElementById('said')
   var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'))
+  // The prayer goes first on the prayer page and stays off the manifestation
+  // page: each lane's visitors hear their own kind first, and never the other's.
+  ;(function () {
+    var prayerChip = document.querySelector('.chip[data-sample="prayer"]')
+    if (!prayerChip) return
+    if (variant === 'prayer') prayerChip.parentNode.insertBefore(prayerChip, prayerChip.parentNode.firstChild)
+    if (variant === 'manifest') prayerChip.hidden = true
+  })()
   var heard = null            // the first sample this visitor played, sent with the sign-up
   var lineEls = []
   var lineAt = -1
@@ -193,7 +202,9 @@
       lineEls.push(p)
     })
     ask.hidden = true; lyrics.hidden = false; transport.hidden = false; piece.hidden = false; hint.hidden = true
-    piece.textContent = '“' + s.title + '”, the first minute, in the ' + s.delivery + ' voice'
+    piece.textContent = '“' + s.title + '”, read by ' + s.voice
+    said.textContent = s.who + ': “' + s.said + '”'
+    said.hidden = false
     left.textContent = fmt(s.end)
     progress.style.width = '0'
     chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c.dataset.sample === key)) })
@@ -257,7 +268,7 @@
     lineEls.forEach(function (p) { p.className = 'done' })
     chips.forEach(function (c) { c.setAttribute('aria-pressed', 'false') })
     hint.hidden = false
-    hint.textContent = joined() ? 'That was one minute. Tap another to hear it.' : 'That was one minute. Yours would be about your day.'
+    hint.textContent = joined() ? 'Tap another to hear it.' : 'That came from two sentences. Yours would be about your day.'
   })
   voice.addEventListener('error', function () {
     if (!current) return
